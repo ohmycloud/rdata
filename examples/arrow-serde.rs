@@ -1,8 +1,8 @@
-use std::sync::Arc;
 use arrow::array::AsArray;
 use arrow::datatypes::{DataType, Field, Schema, UInt32Type};
 use arrow::json::ReaderBuilder;
 use serde::Serialize;
+use std::sync::Arc;
 
 #[derive(Serialize)]
 struct MyStruct {
@@ -18,8 +18,14 @@ fn main() -> anyhow::Result<()> {
     ]);
 
     let rows = vec![
-        MyStruct{ age: 18, language: "Rakudo".to_string() },
-        MyStruct{ age: 15, language: "Rust".to_string() },
+        MyStruct {
+            age: 18,
+            language: "Rakudo".to_string(),
+        },
+        MyStruct {
+            age: 15,
+            language: "Rust".to_string(),
+        },
     ];
 
     let mut decoder = ReaderBuilder::new(Arc::new(schema)).build_decoder()?;
