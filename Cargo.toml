@@ -8,6 +8,16 @@ edition = "2021"
 [dependencies]
 anyhow = "1.0.86"
 arrow = { version = "53.0.0", features = ["prettyprint"] }
-chrono = "0.4.38"
+chrono = { version = "0.4.38", features = ["serde"] }
+clap = { version = "4.5.17", features = ["derive"] }
+crossbeam-channel = "0.5.13"
+datafusion = { version = "41.0.0", features = ["serde"] }
+dirs = "5.0.1"
+enum_dispatch = "0.3.13"
+oneshot = "0.1.8"
+parquet = "53.0.0"
+polars = { version = "0.42.0", features = ["parquet", "timezones", "sql", "lazy"] }
+reedline-repl-rs = { version = "1.2.1", features = ["derive"] }
 serde = { version = "1.0.209", features = ["derive"] }
 serde_json = "1.0.128"
+tokio = { version = "1.40.0", features = ["full", "macros", "rt", "rt-multi-thread"] }

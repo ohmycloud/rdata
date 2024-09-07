@@ -1,11 +1,11 @@
-use std::fs::File;
-use std::io::BufReader;
 use arrow::datatypes::{DataType, Field, Schema};
-use std::sync::Arc;
-use arrow::json::{ReaderBuilder, WriterBuilder};
 use arrow::json::writer::JsonArray;
+use arrow::json::{ReaderBuilder, WriterBuilder};
 use chrono::{DateTime, NaiveDateTime, TimeZone, Utc};
 use serde::{Deserialize, Deserializer};
+use std::fs::File;
+use std::io::BufReader;
+use std::sync::Arc;
 
 #[derive(Debug, Deserialize)]
 struct User {
@@ -31,7 +31,8 @@ struct User {
 }
 
 fn deserialize_string_date<'de, D>(deserializer: D) -> Result<DateTime<Utc>, D::Error>
-where D: Deserializer<'de>,
+where
+    D: Deserializer<'de>,
 {
     let s = String::deserialize(deserializer)?;
     // format yyyy-MM-ddThh:mm:ss.SSS
@@ -77,7 +78,7 @@ fn main() -> anyhow::Result<()> {
             DataType::List(Arc::new(Field::new(
                 "viewed_but_not_started",
                 DataType::Int32,
-                false
+                false,
             ))),
             true,
         ),
@@ -86,17 +87,13 @@ fn main() -> anyhow::Result<()> {
             DataType::List(Arc::new(Field::new(
                 "started_but_not_finished",
                 DataType::Int32,
-                false
+                false,
             ))),
             true,
         ),
         Field::new(
             "finished",
-            DataType::List(Arc::new(Field::new(
-                "finished",
-                DataType::Int32,
-                false
-            ))),
+            DataType::List(Arc::new(Field::new("finished", DataType::Int32, false))),
             true,
         ),
         Field::new("last_email_notification", DataType::Date64, true),
